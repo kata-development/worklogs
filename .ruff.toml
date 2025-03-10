@@ -1,0 +1,21 @@
+exclude = [
+    ".venv",
+    "venv",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git"
+]
+line-length = 119
+indent-width = 4
+target-version = "py313"
+
+[lint]
+select = [
+    "F", # Flake8
+    "B", # Black
+    "I", # isort
+    "E", # error
+    "W"  # warning
+]
+ignore = []
+fixable = ["ALL"]
