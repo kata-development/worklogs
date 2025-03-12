@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 from config.config import Config
-from utils.constants import DATABASE_URL_MISSING_ERROR, ENV_PRODUCTION_FILE, SECRET_KEY_MISSING_ERROR
+from utils.constants import DATABASE_URI_MISSING_ERROR, ENV_PRODUCTION_FILE, SECRET_KEY_MISSING_ERROR
 
 
 class ProductionConfig(Config):
@@ -20,10 +20,10 @@ class ProductionConfig(Config):
 
     DEBUG = False
 
-    SECRET_KEY: str | None = os.environ.get("SECRET_KEY")
+    SECRET_KEY = os.environ.get("SECRET_KEY")
     if SECRET_KEY is None:
         raise RuntimeError(SECRET_KEY_MISSING_ERROR)
 
-    SQLALCHEMY_DATABASE_URI: str | None = os.environ.get("SQLALCHEMY_DATABASE_URI")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
     if SQLALCHEMY_DATABASE_URI is None:
-        raise RuntimeError(DATABASE_URL_MISSING_ERROR)
+        raise RuntimeError(DATABASE_URI_MISSING_ERROR)

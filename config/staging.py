@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 from config.config import Config
-from utils.constants import DATABASE_URL_MISSING_ERROR, ENV_STAGING_FILE, SECRET_KEY_MISSING_ERROR
+from utils.constants import DATABASE_URI_MISSING_ERROR, ENV_STAGING_FILE, SECRET_KEY_MISSING_ERROR
 
 
 class StagingConfig(Config):
@@ -26,4 +26,4 @@ class StagingConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
     if SQLALCHEMY_DATABASE_URI is None:
-        raise RuntimeError(DATABASE_URL_MISSING_ERROR)
+        raise RuntimeError(DATABASE_URI_MISSING_ERROR)

@@ -14,5 +14,5 @@ TESTING_SECRET_KEY = "testing-secret-key"
 SQLITE_MEMORY_DATABASE_URI = "sqlite:///:memory:"
 
 # エラーメッセージ
-DATABASE_URL_MISSING_ERROR = "環境変数にDATABASE_URLが登録されていません"
+DATABASE_URI_MISSING_ERROR = "環境変数にDATABASE_URIが登録されていません"
 SECRET_KEY_MISSING_ERROR = "環境変数にSECRET_KEYが登録されていません"

@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 from config.config import Config
-from utils.constants import DATABASE_URL_MISSING_ERROR, DEVELOPMENT_SECRET_KEY, ENV_DEVELOPMENT_FILE
+from utils.constants import DATABASE_URI_MISSING_ERROR, DEVELOPMENT_SECRET_KEY, ENV_DEVELOPMENT_FILE
 
 
 class DevelopmentConfig(Config):
@@ -22,4 +22,4 @@ class DevelopmentConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
     if SQLALCHEMY_DATABASE_URI is None:
-        raise RuntimeError(DATABASE_URL_MISSING_ERROR)
+        raise RuntimeError(DATABASE_URI_MISSING_ERROR)
