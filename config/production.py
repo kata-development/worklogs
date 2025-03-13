@@ -20,7 +20,7 @@ class ProductionConfig(Config):
 
     DEBUG = False
 
-    SECRET_KEY = os.environ.get("SECRET_KEY")
+    SECRET_KEY = os.getenv("SECRET_KEY")
     if SECRET_KEY is None:
         raise RuntimeError(SECRET_KEY_MISSING_ERROR)
 
