@@ -15,7 +15,7 @@ class DevelopmentConfig(Config):
     """
 
     dotenv_path = Config.basedir / ENV_DEVELOPMENT_FILE
-    load_dotenv(dotenv_path)
+    load_dotenv(dotenv_path, override=True)
 
     DEBUG = True
     SECRET_KEY = DEVELOPMENT_SECRET_KEY

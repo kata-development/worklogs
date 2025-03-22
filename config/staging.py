@@ -16,7 +16,7 @@ class StagingConfig(Config):
     """
 
     dotenv_path = Config.basedir / ENV_STAGING_FILE
-    load_dotenv(dotenv_path)
+    load_dotenv(dotenv_path, override=True)
 
     DEBUG = False
 

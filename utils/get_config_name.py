@@ -20,7 +20,7 @@ def get_config_name() -> str:
     if not dotenv_path.exists():
         raise FileNotFoundError(f"{CONFIG_FILE_NOT_FOUND_ERROR}: {dotenv_path}")
 
-    load_dotenv(dotenv_path)
+    load_dotenv(dotenv_path, override=True)
     config_name = os.getenv("FLASK_CONFIG", "default")
 
     return config_name
