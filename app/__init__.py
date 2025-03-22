@@ -25,7 +25,11 @@ def create_app(config_name: str) -> Flask:
     app = Flask(__name__)
     app.config.from_object(config_map[config_name])
 
+    with app.app_context():
+        from app import models  # noqa: F401
+
     app.register_blueprint(auth_bp)
+
     db.init_app(app)
     migrate.init_app(app, db)
 
