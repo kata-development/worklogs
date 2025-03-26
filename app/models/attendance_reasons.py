@@ -13,7 +13,7 @@ class AttendanceReason(db.Model):  # type: ignore
     __tablename__ = "attendance_reasons"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-    name = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String(255), unique=True, nullable=False)
 
     created_at = db.Column(db.DateTime, nullable=False, default=now_jst)
     updated_at = db.Column(db.DateTime, nullable=False, default=now_jst, onupdate=now_jst)
