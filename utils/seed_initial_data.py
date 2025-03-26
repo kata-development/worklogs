@@ -16,14 +16,7 @@ from utils.get_config_name import get_config_name
 def seed_work_units() -> None:
     """工数単位モデルのシードデータを登録"""
 
-    # 出向先企業の外部キー「工数単位ID」にデフォルト1を設定しているため、
-    # id=1のデータを必須として登録する
-    id_1 = WorkUnit.query.filter_by(id=1).first()
-    if not id_1:
-        db.session.add(WorkUnit(id=1, minute=15))
-
-    # id=1以外のデータを登録
-    units = [30, 60]
+    units = [15, 30, 60]
     for unit in units:
         existing = WorkUnit.query.filter_by(minute=unit).first()
         if not existing:
