@@ -1,8 +1,8 @@
 """create all tables
 
-Revision ID: ba56afa8c8c2
+Revision ID: f779cb62377c
 Revises: 
-Create Date: 2025-03-22 14:57:32.107000
+Create Date: 2025-03-26 13:26:44.810348
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ba56afa8c8c2'
+revision = 'f779cb62377c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,8 +22,9 @@ def upgrade():
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
     )
     op.create_table('employees',
     sa.Column('employee_id', sa.Integer(), nullable=False),
@@ -33,7 +34,7 @@ def upgrade():
     sa.Column('is_admin', sa.Boolean(), nullable=False),
     sa.Column('is_active', sa.Boolean(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('version', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('employee_id'),
     sa.UniqueConstraint('email')
@@ -43,7 +44,7 @@ def upgrade():
     sa.Column('month', sa.Integer(), nullable=False),
     sa.Column('amount', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.CheckConstraint('month >= 1 AND month <= 12', name='check_telework_allowances_month_range'),
     sa.PrimaryKeyConstraint('year', 'month')
     )
@@ -51,7 +52,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('minute', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.CheckConstraint('minute >= 1', name='check_work_units_valid_minute'),
     sa.PrimaryKeyConstraint('id')
     )
@@ -74,7 +75,7 @@ def upgrade():
     sa.Column('late_night_break_end', sa.Time(), nullable=True),
     sa.Column('remarks', sa.String(length=255), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('version', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['work_unit_id'], ['work_units.id'], ),
     sa.PrimaryKeyConstraint('company_id'),
@@ -85,7 +86,7 @@ def upgrade():
     sa.Column('checkup_date', sa.Date(), nullable=False),
     sa.Column('amount', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('version', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['employee_id'], ['employees.employee_id'], ),
     sa.PrimaryKeyConstraint('employee_id', 'checkup_date')
@@ -107,7 +108,7 @@ def upgrade():
     sa.Column('is_telecommuting', sa.Boolean(), nullable=False),
     sa.Column('actual_cost', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('version', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['company_id'], ['client_companies.company_id'], ),
     sa.ForeignKeyConstraint(['employee_id'], ['employees.employee_id'], ),
@@ -123,7 +124,7 @@ def upgrade():
     sa.Column('end_date', sa.Date(), nullable=True),
     sa.Column('remarks', sa.String(length=255), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('version', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['company_id'], ['client_companies.company_id'], ),
     sa.ForeignKeyConstraint(['employee_id'], ['employees.employee_id'], ),
@@ -136,7 +137,7 @@ def upgrade():
     sa.Column('day', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('version', sa.Integer(), nullable=False),
     sa.CheckConstraint('day >= 1 AND day <= 31', name='check_fixed_holidays_day_range'),
     sa.CheckConstraint('month >= 1 AND month <= 12', name='check_fixed_holidays_month_range'),
@@ -153,7 +154,7 @@ def upgrade():
     sa.Column('description', sa.String(length=255), nullable=True),
     sa.Column('remarks', sa.String(length=255), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('version', sa.Integer(), nullable=False),
     sa.CheckConstraint('month >= 1 AND month <= 12', name='check_monthly_attendances_month_range'),
     sa.ForeignKeyConstraint(['company_id'], ['client_companies.company_id'], ),
@@ -167,7 +168,7 @@ def upgrade():
     sa.Column('event_date', sa.Date(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('version', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['company_id'], ['client_companies.company_id'], ),
     sa.PrimaryKeyConstraint('id')
