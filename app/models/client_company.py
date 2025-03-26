@@ -1,7 +1,7 @@
 from datetime import time
 
 from app import db
-from utils.now_jst import now_jst
+from utils.datetime_utils import now_jst
 
 
 class ClientCompany(db.Model):  # type: ignore

@@ -1,5 +1,5 @@
 from app import db
-from utils.now_jst import now_jst
+from utils.datetime_utils import now_jst
 
 
 class WorkUnit(db.Model):  # type: ignore
