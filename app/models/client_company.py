@@ -22,7 +22,7 @@ class ClientCompany(db.Model):  # type: ignore
 
     start_time = db.Column(db.Time, nullable=False, default=time(9, 0))
     end_time = db.Column(db.Time, nullable=False, default=time(18, 0))
-    work_unit_id = db.Column(db.Integer, db.ForeignKey("work_units.id"), nullable=False, default=1)
+    work_unit_id = db.Column(db.Integer, db.ForeignKey("work_units.id"), nullable=False)
 
     # 勤務時間外の休憩時間：紐付く勤怠データがある場合は編集不可とする
     morning_break_start = db.Column(db.Time, nullable=True)
