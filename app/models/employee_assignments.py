@@ -25,5 +25,5 @@ class EmployeeAssignment(db.Model):  # type: ignore
     remarks = db.Column(db.String(255), nullable=True)
 
     created_at = db.Column(db.DateTime, nullable=False, default=now_jst)
-    updated_at = db.Column(db.DateTime, nullable=True, onupdate=now_jst)
+    updated_at = db.Column(db.DateTime, nullable=False, default=now_jst, onupdate=now_jst)
     version = db.Column(db.Integer, nullable=False, default=0)

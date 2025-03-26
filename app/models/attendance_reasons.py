@@ -16,4 +16,4 @@ class AttendanceReason(db.Model):  # type: ignore
     name = db.Column(db.String(255), nullable=False)
 
     created_at = db.Column(db.DateTime, nullable=False, default=now_jst)
-    updated_at = db.Column(db.DateTime, nullable=True, onupdate=now_jst)
+    updated_at = db.Column(db.DateTime, nullable=False, default=now_jst, onupdate=now_jst)

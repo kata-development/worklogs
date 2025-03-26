@@ -16,7 +16,7 @@ class TeleworkAllowance(db.Model):  # type: ignore
     amount = db.Column(db.Integer, nullable=False)
 
     created_at = db.Column(db.DateTime, nullable=False, default=now_jst)
-    updated_at = db.Column(db.DateTime, nullable=True, onupdate=now_jst)
+    updated_at = db.Column(db.DateTime, nullable=False, default=now_jst, onupdate=now_jst)
 
     __table_args__ = (
         db.PrimaryKeyConstraint("year", "month"),

@@ -16,7 +16,7 @@ class HealthCheckup(db.Model):  # type: ignore
     amount = db.Column(db.Integer, nullable=False)
 
     created_at = db.Column(db.DateTime, nullable=False, default=now_jst)
-    updated_at = db.Column(db.DateTime, nullable=True, onupdate=now_jst)
+    updated_at = db.Column(db.DateTime, nullable=False, default=now_jst, onupdate=now_jst)
     version = db.Column(db.Integer, nullable=False, default=0)
 
     __table_args__ = (db.PrimaryKeyConstraint("employee_id", "checkup_date"),)

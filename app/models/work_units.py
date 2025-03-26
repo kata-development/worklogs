@@ -16,6 +16,6 @@ class WorkUnit(db.Model):  # type: ignore
     minute = db.Column(db.Integer, nullable=False, default=15)
 
     created_at = db.Column(db.DateTime, nullable=False, default=now_jst)
-    updated_at = db.Column(db.DateTime, nullable=True, onupdate=now_jst)
+    updated_at = db.Column(db.DateTime, nullable=False, default=now_jst, onupdate=now_jst)
 
     __table_args__ = (db.CheckConstraint("minute >= 1", name="check_work_units_valid_minute"),)

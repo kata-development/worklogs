@@ -42,7 +42,7 @@ class DailyAttendance(db.Model):  # type: ignore
     actual_cost = db.Column(db.Integer, nullable=False, default=0)
 
     created_at = db.Column(db.DateTime, nullable=False, default=now_jst)
-    updated_at = db.Column(db.DateTime, nullable=True, onupdate=now_jst)
+    updated_at = db.Column(db.DateTime, nullable=False, default=now_jst, onupdate=now_jst)
     version = db.Column(db.Integer, nullable=False, default=0)
 
     __table_args__ = (db.UniqueConstraint("employee_id", "company_id", "report_date", name="unique_daily_attendance"),)
