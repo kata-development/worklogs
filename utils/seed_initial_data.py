@@ -47,18 +47,23 @@ def seed_telework_allowances() -> None:
             )
 
 
-def seed_all() -> None:
-    """すべてのシードデータを登録"""
+def seed_all(app: Flask) -> None:
+    """
+    すべてのシードデータを登録
+
+    Args:
+        app (Flask): Flaskアプリケーションインスタンス
+    """
 
     try:
         seed_work_units()
         seed_attendance_reasons()
         seed_telework_allowances()
         db.session.commit()
-        print("シードデータを登録しました")
+        app.logger.info("シードデータを登録しました")
     except Exception as e:
         db.session.rollback()
-        print(f"シードデータ登録エラー: {e}")
+        app.logger.exception(f"シードデータ登録エラー: {e}")
 
 
 if __name__ == "__main__":
@@ -66,4 +71,4 @@ if __name__ == "__main__":
     app: Flask = create_app(config_name)
 
     with app.app_context():
-        seed_all()
+        seed_all(app)
