@@ -21,7 +21,7 @@ config_map: dict[str, Type[Config]] = {
 # ログレベルのマッピング
 log_level_map: dict[str, int] = {
     "development": logging.DEBUG,
-    "production": logging.WARNING,
-    "staging": logging.WARNING,
+    "production": logging.INFO,
+    "staging": logging.INFO,
     "testing": logging.INFO,
 }
