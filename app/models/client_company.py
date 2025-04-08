@@ -13,7 +13,7 @@ class ClientCompany(db.Model):  # type: ignore
     __tablename__ = "client_companies"
 
     # 企業コード：登録時に管理部が付与する番号
-    company_id = db.Column(db.String(100), primary_key=True, nullable=False)
+    company_code = db.Column(db.String(100), primary_key=True, nullable=False)
     # 企業名：紐付く勤怠データがある場合は編集不可とする
     name = db.Column(db.String(100), unique=True, nullable=False)
     # 連絡先：住所やメールアドレスや担当者など
