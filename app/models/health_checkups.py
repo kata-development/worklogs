@@ -3,8 +3,7 @@ from utils.datetime_utils import now_jst
 
 
 class HealthCheckup(db.Model):  # type: ignore
-    """
-    健康診断受診モデル
+    """健康診断受診モデル
 
     社員ごとに健康診断受診日と受診料を登録する
     """

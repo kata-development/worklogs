@@ -18,13 +18,11 @@ migrate = Migrate()
 
 
 def setup_logging(config_path: str) -> None:
-    """
-    ロギング設定を適用する
+    """ロギング設定を適用する
 
     Args:
         config_path (str): 使用する設定環境
     """
-
     if os.path.exists(config_path):
         with open(config_path, "r") as file:
             config = yaml.safe_load(file)
@@ -34,8 +32,7 @@ def setup_logging(config_path: str) -> None:
 
 
 def create_app(config_name: str | None = None) -> Flask:
-    """
-    アプリケーションを作成する
+    """アプリケーションを作成する
 
     Args:
         config_name (str): 使用する設定環境
@@ -46,7 +43,6 @@ def create_app(config_name: str | None = None) -> Flask:
     Returns:
         Flask: 初期化済みFlaskアプリケーションインスタンス
     """
-
     # 環境ごとの設定
     app = Flask(__name__)
     if config_name is None:

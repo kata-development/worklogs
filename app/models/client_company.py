@@ -5,8 +5,7 @@ from utils.datetime_utils import now_jst
 
 
 class ClientCompany(db.Model):  # type: ignore
-    """
-    出向先企業モデル
+    """出向先企業モデル
 
     出向先企業のマスターデータ
     """

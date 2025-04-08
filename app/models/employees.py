@@ -3,8 +3,7 @@ from utils.datetime_utils import now_jst
 
 
 class Employee(db.Model):  # type: ignore
-    """
-    社員モデル
+    """社員モデル
 
     社員情報のマスターデータ
     """

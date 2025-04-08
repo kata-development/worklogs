@@ -7,8 +7,7 @@ from utils.constants import DATABASE_CONFIG_ERROR, DB_DIALECT, DB_DRIVER, ENV_PR
 
 
 class ProductionConfig(Config):
-    """
-    本番環境用の設定を定義
+    """本番環境用の設定を定義
 
     Raises:
         RuntimeError: SECRET_KEY が環境変数として設定されていない場合

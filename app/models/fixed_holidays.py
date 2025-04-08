@@ -3,8 +3,7 @@ from utils.datetime_utils import now_jst
 
 
 class FixedHoliday(db.Model):  # type: ignore
-    """
-    固定祭日モデル
+    """固定祭日モデル
 
     企業ごとの毎年固定の祭日（例：12/30～1/3は年末年始休暇）
     祭日名または日付の重複を許容する

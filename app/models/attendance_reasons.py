@@ -3,8 +3,7 @@ from utils.datetime_utils import now_jst
 
 
 class AttendanceReason(db.Model):  # type: ignore
-    """
-    勤怠理由モデル
+    """勤怠理由モデル
 
     日次勤怠の「理由」項目で選択できる値
     （欠勤、遅刻、早退、遅刻・早退、電車遅延など）

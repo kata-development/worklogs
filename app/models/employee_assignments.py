@@ -3,8 +3,7 @@ from utils.datetime_utils import now_jst
 
 
 class EmployeeAssignment(db.Model):  # type: ignore
-    """
-    社員配置モデル
+    """社員配置モデル
 
     社員と出向先企業の中間モデルの拡張
     社員の出向先企業を期間（日単位）で登録する

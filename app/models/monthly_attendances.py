@@ -3,8 +3,7 @@ from utils.datetime_utils import now_jst
 
 
 class MonthlyAttendance(db.Model):  # type: ignore
-    """
-    月次勤怠モデル
+    """月次勤怠モデル
 
     社員と出向先企業の中間モデルの拡張
     社員、出向先企業、年、月で一意になる月次の勤怠データ

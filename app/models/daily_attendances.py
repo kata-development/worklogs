@@ -3,8 +3,7 @@ from utils.datetime_utils import now_jst
 
 
 class DailyAttendance(db.Model):  # type: ignore
-    """
-    日次勤怠モデル
+    """日次勤怠モデル
 
     社員と出向先企業の中間モデルの拡張
     月次勤怠に所属する日次の勤怠データ
