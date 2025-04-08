@@ -49,6 +49,9 @@ def create_app(config_name: str | None = None) -> Flask:
         config_name = get_config_name()
     app.config.from_object(config_map[config_name])
 
+    # モデル
+    from app import models  # noqa: F401
+
     # ロギング
     setup_logging(LOGGING_CONFIG_FILE)
     app.logger = logging.getLogger(LOGGING_LOGGER_NAME)
