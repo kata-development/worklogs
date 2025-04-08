@@ -16,7 +16,7 @@ class ProductionConfig(Config):
     """
 
     dotenv_path = Config.basedir / ENV_PRODUCTION_FILE
-    load_dotenv(dotenv_path)
+    load_dotenv(dotenv_path, override=True)
 
     DEBUG = False
 
