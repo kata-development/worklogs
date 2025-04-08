@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AR{% endblock %}</title>
+    <link rel="stylesheet" type='text/css' href="{{url_for('static', filename='css/style.css')}}">
+    {% include 'partials/_cdn_css_links.html' %}
+    {% block script %}{% endblock %}
+</head>
+
+<body>
+    <div class="bg-secondary-subtle p-4 d-flex flex-column min-vh-100">
+        <div class="container-fluid border border-2 border-secondary rounded bg-body shadow flex-grow-1 d-flex flex-column">
+            {% block header %}{% endblock %}
+            {% block content %}{% endblock %}
+            <div class="mt-auto">
+                {% include 'partials/_footer.html' %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'partials/_cdn_js_links.html' %}
+</body>
+</html>
