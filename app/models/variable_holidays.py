@@ -3,8 +3,7 @@ from utils.datetime_utils import now_jst
 
 
 class VariableHoliday(db.Model):  # type: ignore
-    """
-    変動祭日モデル
+    """変動祭日モデル
 
     企業ごとの特定の日の祭日
     祭日名または日付の重複を許容する
@@ -13,7 +12,7 @@ class VariableHoliday(db.Model):  # type: ignore
     __tablename__ = "variable_holidays"
 
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    company_id = db.Column(db.String(100), db.ForeignKey("client_companies.company_id"), nullable=False)
+    company_code = db.Column(db.String(100), db.ForeignKey("client_companies.company_code"), nullable=False)
     event_date = db.Column(db.Date, nullable=False)
     name = db.Column(db.String(100), nullable=False)
 

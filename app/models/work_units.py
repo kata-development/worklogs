@@ -3,8 +3,7 @@ from utils.datetime_utils import now_jst
 
 
 class WorkUnit(db.Model):  # type: ignore
-    """
-    工数単位モデル
+    """工数単位モデル
 
     出向先企業の「工数単位」項目で選択できる値（15分、30分など）
     """

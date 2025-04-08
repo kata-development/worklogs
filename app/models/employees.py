@@ -3,16 +3,15 @@ from utils.datetime_utils import now_jst
 
 
 class Employee(db.Model):  # type: ignore
-    """
-    社員モデル
+    """社員モデル
 
     社員情報のマスターデータ
     """
 
     __tablename__ = "employees"
 
-    # 社員ID：入社時に管理部から発行された4桁の数字
-    employee_id = db.Column(db.Integer, primary_key=True, nullable=False)
+    # 社員コード：入社時に管理部から発行された4桁の数字
+    employee_code = db.Column(db.String(100), primary_key=True, nullable=False)
     # 氏名：姓+名を結合したフルネーム
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)

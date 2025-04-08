@@ -1,5 +1,4 @@
-"""
-シードデータ登録スクリプト
+"""シードデータ登録スクリプト
 使い方：プロジェクトルートで以下のコマンドを実行
 $ PYTHONPATH=${PWD} python utils/seed_initial_data.py
 """
@@ -15,7 +14,6 @@ from utils.get_config_name import get_config_name
 
 def seed_work_units() -> None:
     """工数単位モデルのシードデータを登録"""
-
     units = [15, 30, 60]
     for unit in units:
         existing = WorkUnit.query.filter_by(minute=unit).first()
@@ -25,7 +23,6 @@ def seed_work_units() -> None:
 
 def seed_attendance_reasons() -> None:
     """勤怠理由モデルのシードデータを登録"""
-
     names = ["欠勤", "遅刻", "早退", "遅刻・早退", "電車遅延", "特別休暇", "災害遅延", "災害遅・早", "時差出勤"]
     for name in names:
         existing = AttendanceReason.query.filter_by(name=name).first()
@@ -35,7 +32,6 @@ def seed_attendance_reasons() -> None:
 
 def seed_telework_allowances() -> None:
     """在宅勤務手当モデルのシードデータを登録"""
-
     allowances = [
         {"year": 2024, "month": 4, "amount": 5000},
     ]
@@ -48,13 +44,11 @@ def seed_telework_allowances() -> None:
 
 
 def seed_all(app: Flask) -> None:
-    """
-    すべてのシードデータを登録
+    """すべてのシードデータを登録
 
     Args:
         app (Flask): Flaskアプリケーションインスタンス
     """
-
     try:
         seed_work_units()
         seed_attendance_reasons()

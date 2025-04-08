@@ -7,8 +7,7 @@ from utils.constants import DATABASE_CONFIG_ERROR, DB_DIALECT, DB_DRIVER, DEVELO
 
 
 class DevelopmentConfig(Config):
-    """
-    開発環境用の設定を定義
+    """開発環境用の設定を定義
 
     Raises:
         RuntimeError: データベース構成に必要な環境変数が不足している場合

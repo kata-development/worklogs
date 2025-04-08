@@ -3,8 +3,7 @@ from utils.datetime_utils import now_jst
 
 
 class MonthlyAttendance(db.Model):  # type: ignore
-    """
-    月次勤怠モデル
+    """月次勤怠モデル
 
     社員と出向先企業の中間モデルの拡張
     社員、出向先企業、年、月で一意になる月次の勤怠データ
@@ -13,8 +12,8 @@ class MonthlyAttendance(db.Model):  # type: ignore
     __tablename__ = "monthly_attendances"
 
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    employee_id = db.Column(db.Integer, db.ForeignKey("employees.employee_id"), nullable=False)
-    company_id = db.Column(db.String(100), db.ForeignKey("client_companies.company_id"), nullable=False)
+    employee_code = db.Column(db.String(100), db.ForeignKey("employees.employee_code"), nullable=False)
+    company_code = db.Column(db.String(100), db.ForeignKey("client_companies.company_code"), nullable=False)
 
     year = db.Column(db.Integer, nullable=False)
     month = db.Column(db.Integer, nullable=False)
@@ -31,6 +30,6 @@ class MonthlyAttendance(db.Model):  # type: ignore
     version = db.Column(db.Integer, nullable=False, default=0)
 
     __table_args__ = (
-        db.UniqueConstraint("employee_id", "company_id", "year", "month", name="unique_monthly_attendance"),
+        db.UniqueConstraint("employee_code", "company_code", "year", "month", name="unique_monthly_attendance"),
         db.CheckConstraint("month >= 1 AND month <= 12", name="check_monthly_attendances_month_range"),
     )

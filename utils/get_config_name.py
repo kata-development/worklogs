@@ -7,13 +7,11 @@ from utils.constants import CONFIG_FILE_NOT_FOUND_ERROR, ENV_CONFIG_DIR, ENV_FIL
 
 
 def get_config_name() -> str:
-    """
-    設定環境名 (config_name) を取得する
+    """設定環境名 (config_name) を取得する
 
     Returns:
         str: 設定環境名（例: "development", "production" など）
     """
-
     basedir = Path(__file__).resolve().parent.parent
     dotenv_path = basedir / ENV_CONFIG_DIR / ENV_FILE
 

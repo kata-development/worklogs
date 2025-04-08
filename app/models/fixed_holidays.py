@@ -3,8 +3,7 @@ from utils.datetime_utils import now_jst
 
 
 class FixedHoliday(db.Model):  # type: ignore
-    """
-    固定祭日モデル
+    """固定祭日モデル
 
     企業ごとの毎年固定の祭日（例：12/30～1/3は年末年始休暇）
     祭日名または日付の重複を許容する
@@ -13,7 +12,7 @@ class FixedHoliday(db.Model):  # type: ignore
     __tablename__ = "fixed_holidays"
 
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    company_id = db.Column(db.String(100), db.ForeignKey("client_companies.company_id"), nullable=False)
+    company_code = db.Column(db.String(100), db.ForeignKey("client_companies.company_code"), nullable=False)
     month = db.Column(db.Integer, nullable=False)
     day = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String(100), nullable=False)

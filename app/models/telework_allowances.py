@@ -3,8 +3,7 @@ from utils.datetime_utils import now_jst
 
 
 class TeleworkAllowance(db.Model):  # type: ignore
-    """
-    在宅勤務手当モデル
+    """在宅勤務手当モデル
 
     在宅勤務手当の金額（出向先企業などに関係なく全社員で共通の金額）
     """
