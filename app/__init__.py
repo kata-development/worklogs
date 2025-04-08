@@ -3,7 +3,9 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 from app.extensions.blueprints import register_blueprints
+from app.extensions.database import init_db
 from app.extensions.logging import setup_logging
+from app.extensions.migrate import init_migrate
 from config import config_map
 from utils.constants import INIT_APP_ENV_MESSAGE
 from utils.get_config_name import get_config_name
@@ -37,8 +39,8 @@ def create_app(config_name: str | None = None) -> Flask:
     register_blueprints(app)
 
     # データベース関連
-    db.init_app(app)
-    migrate.init_app(app, db)
+    init_db(app)
+    init_migrate(app)
 
     # ロギング
     app.logger = setup_logging(config_name)

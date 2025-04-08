@@ -1,6 +1,6 @@
 from datetime import time
 
-from app import db
+from app.extensions.database import db
 from utils.datetime_utils import now_jst
 
 
