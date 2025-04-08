@@ -12,7 +12,7 @@ class FixedHoliday(db.Model):  # type: ignore
     __tablename__ = "fixed_holidays"
 
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    company_id = db.Column(db.String(100), db.ForeignKey("client_companies.company_id"), nullable=False)
+    company_code = db.Column(db.String(100), db.ForeignKey("client_companies.company_code"), nullable=False)
     month = db.Column(db.Integer, nullable=False)
     day = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String(100), nullable=False)

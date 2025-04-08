@@ -12,8 +12,8 @@ class DailyAttendance(db.Model):  # type: ignore
     __tablename__ = "daily_attendances"
 
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    employee_id = db.Column(db.Integer, db.ForeignKey("employees.employee_id"), nullable=False)
-    company_id = db.Column(db.String(100), db.ForeignKey("client_companies.company_id"), nullable=False)
+    employee_code = db.Column(db.String(100), db.ForeignKey("employees.employee_code"), nullable=False)
+    company_code = db.Column(db.String(100), db.ForeignKey("client_companies.company_code"), nullable=False)
 
     report_date = db.Column(db.Date, nullable=False)
     start_time = db.Column(db.Time, nullable=False)
@@ -44,4 +44,6 @@ class DailyAttendance(db.Model):  # type: ignore
     updated_at = db.Column(db.DateTime, nullable=False, default=now_jst, onupdate=now_jst)
     version = db.Column(db.Integer, nullable=False, default=0)
 
-    __table_args__ = (db.UniqueConstraint("employee_id", "company_id", "report_date", name="unique_daily_attendance"),)
+    __table_args__ = (
+        db.UniqueConstraint("employee_code", "company_code", "report_date", name="unique_daily_attendance"),
+    )

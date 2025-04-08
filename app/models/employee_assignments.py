@@ -12,8 +12,8 @@ class EmployeeAssignment(db.Model):  # type: ignore
     __tablename__ = "employee_assignments"
 
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    employee_id = db.Column(db.Integer, db.ForeignKey("employees.employee_id"), nullable=False)
-    company_id = db.Column(db.String(100), db.ForeignKey("client_companies.company_id"), nullable=False)
+    employee_code = db.Column(db.String(100), db.ForeignKey("employees.employee_code"), nullable=False)
+    company_code = db.Column(db.String(100), db.ForeignKey("client_companies.company_code"), nullable=False)
 
     # 開始日：社員の各企業への出向期間は重複しない
     start_date = db.Column(db.Date, nullable=False)
