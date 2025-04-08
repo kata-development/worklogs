@@ -16,6 +16,13 @@ DB_DIALECT = "mysql"
 DB_DRIVER = "pymysql"
 SQLITE_MEMORY_DATABASE_URI = "sqlite:///:memory:"
 
+# ロギング
+LOGGING_CONFIG_FILE = "config/logging.yaml"
+LOGGING_LOGGER_NAME = "app_logger"
+
+# メッセージ
+INIT_APP_ENV_MESSAGE = "環境でアプリケーションを初期化しました"
+
 # エラーメッセージ
 DATABASE_CONFIG_ERROR = "データベース構成に必要な環境変数が不足しています"
 SECRET_KEY_MISSING_ERROR = "環境変数にSECRET_KEYが登録されていません"
