@@ -1,34 +1,17 @@
-import logging
-import logging.config
-import os
-
-import yaml
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
-from config import config_map, log_level_map
-from utils.constants import INIT_APP_ENV_MESSAGE, LOGGING_CONFIG_FILE, LOGGING_LOGGER_NAME
+from app.extensions.blueprints import register_blueprints
+from app.extensions.database import init_db
+from app.extensions.logging import setup_logging
+from app.extensions.migrate import init_migrate
+from config import config_map
+from utils.constants import INIT_APP_ENV_MESSAGE
 from utils.get_config_name import get_config_name
-
-from .routes.auth import auth_bp
 
 db = SQLAlchemy()
 migrate = Migrate()
-
-
-def setup_logging(config_path: str) -> None:
-    """ロギング設定を適用する
-
-    Args:
-        config_path (str): 使用する設定環境
-    """
-    if os.path.exists(config_path):
-        with open(config_path, "r") as file:
-            config = yaml.safe_load(file)
-        logging.config.dictConfig(config)
-    else:
-        logging.basicConfig(level=logging.INFO)
 
 
 def create_app(config_name: str | None = None) -> Flask:
@@ -52,18 +35,15 @@ def create_app(config_name: str | None = None) -> Flask:
     # モデル
     from app import models  # noqa: F401
 
-    # ロギング
-    setup_logging(LOGGING_CONFIG_FILE)
-    app.logger = logging.getLogger(LOGGING_LOGGER_NAME)
-    app.logger.setLevel(log_level_map.get(config_name, logging.WARNING))
-
-    app.logger.info(f"{config_name} {INIT_APP_ENV_MESSAGE}")
-
     # ルート
-    app.register_blueprint(auth_bp)
+    register_blueprints(app)
 
     # データベース関連
-    db.init_app(app)
-    migrate.init_app(app, db)
+    init_db(app)
+    init_migrate(app)
+
+    # ロギング
+    app.logger = setup_logging(config_name)
+    app.logger.info(f"{config_name} {INIT_APP_ENV_MESSAGE}")
 
     return app
