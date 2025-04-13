@@ -1,11 +1,25 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>ログイン</p> 
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}worklogs - ログイン{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-5 col-8 col-lg-6">
+    <h1 class="h4 fw-normal text-center mt-4">
+        <i class="bi bi-alarm" style="font-size: 1.5rem; color: cornflowerblue;"></i>
+        勤怠管理システム（ログイン）
+    </h1>
+    {% from "helpers/_formhelper.html" import render_field %}
+    <form method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        {{ render_field(form.employee_code, class="form-control mt-5") }}
+        {{ render_field(form.email, class="form-control mt-4") }}
+        {{ render_field(form.password, class="form-control mt-4") }}
+        <p class="fw-light text-center mt-4">
+            ※ パスワードを変更したい・忘れてしまった方は <a href="#">こちら</a>
+        </p>
+        <div class="d-grid col-md-6 col-12 mx-auto my-5">
+            {{ form.submit(class="btn btn-success") }}    
+        </div>    
+    </form>
+</div>
+{% endblock %}
