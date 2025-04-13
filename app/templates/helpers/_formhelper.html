@@ -1,0 +1,18 @@
+{# エラーを含めてフォームの項目を表示する #}
+
+{% macro render_field(field) %}
+    {# 項目にエラーがあればエラー表示用のクラスis-invalidを付与 #}
+    {% set class_name = kwargs.pop('class', '') %}
+    {% if field.errors %}
+        {% set class_name = class_name + ' is-invalid' if class_name else 'is-invalid' %}
+    {% endif %}
+
+    {{ field(class=class_name, **kwargs) | safe }}
+    
+    {# エラーメッセージの表示 #}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
