@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from app.extensions.blueprints import register_blueprints
 from app.extensions.database import init_db
+from app.extensions.di import setup_di
 from app.extensions.logging import setup_logging
 from app.extensions.migrate import init_migrate
 from config import config_map
@@ -41,6 +42,9 @@ def create_app(config_name: str | None = None) -> Flask:
     # データベース関連
     init_db(app)
     init_migrate(app)
+
+    # DI設定
+    setup_di(app)
 
     # ロギング
     app.logger = setup_logging(config_name)
