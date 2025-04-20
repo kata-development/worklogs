@@ -29,12 +29,12 @@ LABEL_PASSWORD = "パスワード"
 BUTTON_LOGIN = "ログイン"
 
 # メッセージ
-INIT_APP_ENV_MESSAGE = "環境でアプリケーションを初期化しました"
+MESSAGE_INIT_APP_ENV = "{config} 環境でアプリケーションを初期化しました"
 
 # エラーメッセージ
-DATABASE_CONFIG_ERROR = "データベース構成に必要な環境変数が不足しています"
-SECRET_KEY_MISSING_ERROR = "環境変数にSECRET_KEYが登録されていません"
-CONFIG_FILE_NOT_FOUND_ERROR = "環境設定ファイルが見つかりません"
+ERROR_DATABASE_CONFIG = "データベース構成に必要な環境変数が不足しています"
+ERROR_SECRET_KEY_MISSING = "環境変数にSECRET_KEYが登録されていません"
+ERROR_CONFIG_FILE_NOT_FOUND = "環境設定ファイルが見つかりません"
 
 # 文字
 HALF_WIDTH_ALPHANUMERIC_PATTERN = r"^[a-zA-Z0-9]+$"

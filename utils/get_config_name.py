@@ -3,7 +3,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from utils.constants import CONFIG_FILE_NOT_FOUND_ERROR, ENV_CONFIG_DIR, ENV_FILE
+from utils.constants import ENV_CONFIG_DIR, ENV_FILE, ERROR_CONFIG_FILE_NOT_FOUND
 
 
 def get_config_name() -> str:
@@ -16,7 +16,7 @@ def get_config_name() -> str:
     dotenv_path = basedir / ENV_CONFIG_DIR / ENV_FILE
 
     if not dotenv_path.exists():
-        raise FileNotFoundError(f"{CONFIG_FILE_NOT_FOUND_ERROR}: {dotenv_path}")
+        raise FileNotFoundError(f"{ERROR_CONFIG_FILE_NOT_FOUND}: {dotenv_path}")
 
     load_dotenv(dotenv_path, override=True)
     config_name = os.getenv("FLASK_CONFIG", "default")
