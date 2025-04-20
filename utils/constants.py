@@ -20,6 +20,10 @@ SQLITE_MEMORY_DATABASE_URI = "sqlite:///:memory:"
 LOGGING_CONFIG_FILE = "config/logging.yaml"
 LOGGING_LOGGER_NAME = "app_logger"
 
+# ログイン
+LOGIN_VIEW = "auth.login"  # 未ログイン時のリダイレクト先（ログイン画面）
+LOGIN_REDIRECT_VIEW = "main.top_menu"  # ログイン後のリダイレクト先（トップ画面）
+
 # 項目名のラベル
 LABEL_EMPLOYEE_CODE = "社員コード"
 LABEL_EMAIL = "メールアドレス"
@@ -30,6 +34,8 @@ BUTTON_LOGIN = "ログイン"
 
 # メッセージ
 MESSAGE_INIT_APP_ENV = "{config} 環境でアプリケーションを初期化しました"
+MESSAGE_LOGIN = "ログインしました：{user}"
+MESSAGE_LOGOUT = "ログアウトしました：{user}"
 
 # エラーメッセージ
 ERROR_DATABASE_CONFIG = "データベース構成に必要な環境変数が不足しています"

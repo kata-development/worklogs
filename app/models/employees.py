@@ -1,8 +1,10 @@
+from flask_login import UserMixin  # type: ignore
+
 from app.extensions.database import db
 from utils.datetime_utils import now_jst
 
 
-class Employee(db.Model):  # type: ignore
+class Employee(UserMixin, db.Model):  # type: ignore
     """社員モデル
 
     社員情報のマスターデータ
@@ -25,3 +27,11 @@ class Employee(db.Model):  # type: ignore
     created_at = db.Column(db.DateTime, nullable=False, default=now_jst)
     updated_at = db.Column(db.DateTime, nullable=False, default=now_jst, onupdate=now_jst)
     version = db.Column(db.Integer, nullable=False, default=0)
+
+    def get_id(self) -> str:
+        """Flask-Loginがユーザーを識別するためのIDを返す
+
+        Returns:
+            str: 社員コード
+        """
+        return self.employee_code

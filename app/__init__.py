@@ -6,6 +6,7 @@ from app.extensions.blueprints import register_blueprints
 from app.extensions.database import init_db
 from app.extensions.di import setup_di
 from app.extensions.logging import setup_logging
+from app.extensions.login_manager import init_login_manager
 from app.extensions.migrate import init_migrate
 from config import config_map
 from utils.constants import MESSAGE_INIT_APP_ENV
@@ -45,6 +46,9 @@ def create_app(config_name: str | None = None) -> Flask:
 
     # DI設定
     setup_di(app)
+
+    # ログインマネージャ
+    init_login_manager(app)
 
     # ロギング
     app.logger = setup_logging(config_name)
