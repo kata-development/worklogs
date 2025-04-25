@@ -10,7 +10,7 @@ class EmployeeRepository(EmployeeRepositoryInterface):
     """社員リポジトリ"""
 
     def get_active_employee_by_credentials(self, employee_code: str, email: str) -> Employee | None:
-        """有効な社員を社員IDとメールアドレスで取得する
+        """有効な社員を社員コードとメールアドレスで取得する
 
         Args:
             employee_code (str): 社員コード
@@ -28,10 +28,10 @@ class EmployeeRepository(EmployeeRepositoryInterface):
             raise
 
     def get_by_id(self, employee_code: str) -> Employee | None:
-        """社員コードで社員を取得する
+        """社員コード（id）で社員を取得する
 
         Args:
-            employee_code (int): 社員コード
+            employee_code (str): 社員コード
 
         Returns:
             Employee | None: 該当する社員が存在する場合はEmployeeオブジェクト、存在しない場合はNone

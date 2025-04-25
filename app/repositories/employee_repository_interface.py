@@ -8,7 +8,7 @@ class EmployeeRepositoryInterface(ABC):
 
     @abstractmethod
     def get_active_employee_by_credentials(self, employee_code: str, email: str) -> Employee | None:
-        """有効な社員を社員IDとメールアドレスで取得する
+        """有効な社員を社員コードとメールアドレスで取得する
 
         Args:
             employee_code (str): 社員コード
@@ -21,7 +21,7 @@ class EmployeeRepositoryInterface(ABC):
 
     @abstractmethod
     def get_by_id(self, employee_code: str) -> Employee | None:
-        """員IDで社員を取得する
+        """社員コード（id）で社員を取得する
 
         Args:
             employee_code (str): 社員コード
