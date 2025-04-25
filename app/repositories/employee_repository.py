@@ -1,9 +1,9 @@
-from flask import current_app
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.models.employees import Employee
 from app.repositories.employee_repository_interface import EmployeeRepositoryInterface
 from utils.constants import ERROR_DATABASE
+from utils.logging_utils import log_error
 
 
 class EmployeeRepository(EmployeeRepositoryInterface):
@@ -24,7 +24,7 @@ class EmployeeRepository(EmployeeRepositoryInterface):
 
         except SQLAlchemyError as e:
             key_values = {"employee_code": employee_code, "email": email, "is_active": True}
-            current_app.logger.error(ERROR_DATABASE.format(key_values=key_values, error=e))
+            log_error(ERROR_DATABASE, key_values, e)
             raise
 
     def get_by_id(self, employee_code: str) -> Employee | None:
@@ -41,5 +41,5 @@ class EmployeeRepository(EmployeeRepositoryInterface):
 
         except SQLAlchemyError as e:
             key_values = {"employee_code": employee_code}
-            current_app.logger.error(ERROR_DATABASE.format(key_values=key_values, error=e))
+            log_error(ERROR_DATABASE, key_values, e)
             raise
