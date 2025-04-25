@@ -20,6 +20,10 @@ SQLITE_MEMORY_DATABASE_URI = "sqlite:///:memory:"
 LOGGING_CONFIG_FILE = "config/logging.yaml"
 LOGGING_LOGGER_NAME = "app_logger"
 
+# ログイン
+LOGIN_VIEW = "auth.login"  # 未ログイン時のリダイレクト先（ログイン画面）
+LOGIN_REDIRECT_VIEW = "main.top_menu"  # ログイン後のリダイレクト先（トップ画面）
+
 # 項目名のラベル
 LABEL_EMPLOYEE_CODE = "社員コード"
 LABEL_EMAIL = "メールアドレス"
@@ -29,12 +33,14 @@ LABEL_PASSWORD = "パスワード"
 BUTTON_LOGIN = "ログイン"
 
 # メッセージ
-INIT_APP_ENV_MESSAGE = "環境でアプリケーションを初期化しました"
+MESSAGE_INIT_APP_ENV = "{config} 環境でアプリケーションを初期化しました"
+MESSAGE_LOGIN = "ログインしました：{user}"
+MESSAGE_LOGOUT = "ログアウトしました：{user}"
 
 # エラーメッセージ
-DATABASE_CONFIG_ERROR = "データベース構成に必要な環境変数が不足しています"
-SECRET_KEY_MISSING_ERROR = "環境変数にSECRET_KEYが登録されていません"
-CONFIG_FILE_NOT_FOUND_ERROR = "環境設定ファイルが見つかりません"
+ERROR_DATABASE_CONFIG = "データベース構成に必要な環境変数が不足しています"
+ERROR_SECRET_KEY_MISSING = "環境変数にSECRET_KEYが登録されていません"
+ERROR_CONFIG_FILE_NOT_FOUND = "環境設定ファイルが見つかりません"
 
 # 文字
 HALF_WIDTH_ALPHANUMERIC_PATTERN = r"^[a-zA-Z0-9]+$"
@@ -54,3 +60,6 @@ ERROR_INVALID_FORMAT = "{field}の形式が正しくありません"
 ERROR_PASSWORD_COMBINATION = "パスワードはアルファベットの大文字、小文字、数字、記号 {chars} を組み合わせてください"
 ERROR_ALPHANUMERIC_ONLY = "{field}は半角英数字のみ使用できます"
 ERROR_ALPHANUMERIC_AND_SYMBOLS_ONLY = "{field}は半角英数字と記号 {chars} のみ使用できます"
+ERROR_INVALID_CREDENTIALS = "社員コード、メールアドレス、またはパスワードが正しくありません"
+ERROR_DATABASE = "データベースエラー: {key_values}, error={error}"
+ERROR_AUTHENTICATE_LOGIN = "認証／ログインエラー: error={error}"

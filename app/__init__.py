@@ -4,10 +4,12 @@ from flask_sqlalchemy import SQLAlchemy
 
 from app.extensions.blueprints import register_blueprints
 from app.extensions.database import init_db
+from app.extensions.di import setup_di
 from app.extensions.logging import setup_logging
+from app.extensions.login_manager import init_login_manager
 from app.extensions.migrate import init_migrate
 from config import config_map
-from utils.constants import INIT_APP_ENV_MESSAGE
+from utils.constants import MESSAGE_INIT_APP_ENV
 from utils.get_config_name import get_config_name
 
 db = SQLAlchemy()
@@ -42,8 +44,14 @@ def create_app(config_name: str | None = None) -> Flask:
     init_db(app)
     init_migrate(app)
 
+    # DI設定
+    setup_di(app)
+
+    # ログインマネージャ
+    init_login_manager(app)
+
     # ロギング
     app.logger = setup_logging(config_name)
-    app.logger.info(f"{config_name} {INIT_APP_ENV_MESSAGE}")
+    app.logger.info(MESSAGE_INIT_APP_ENV.format(config=config_name))
 
     return app

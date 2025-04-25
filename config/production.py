@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 from config.config import Config
-from utils.constants import DATABASE_CONFIG_ERROR, DB_DIALECT, DB_DRIVER, ENV_PRODUCTION_FILE, SECRET_KEY_MISSING_ERROR
+from utils.constants import DB_DIALECT, DB_DRIVER, ENV_PRODUCTION_FILE, ERROR_DATABASE_CONFIG, ERROR_SECRET_KEY_MISSING
 
 
 class ProductionConfig(Config):
@@ -21,7 +21,7 @@ class ProductionConfig(Config):
 
     SECRET_KEY = os.getenv("SECRET_KEY")
     if SECRET_KEY is None:
-        raise RuntimeError(SECRET_KEY_MISSING_ERROR)
+        raise RuntimeError(ERROR_SECRET_KEY_MISSING)
 
     DB_USER = os.getenv("DB_USER")
     DB_PASSWORD = os.getenv("DB_PASSWORD")
@@ -29,6 +29,6 @@ class ProductionConfig(Config):
     DB_PORT = os.getenv("DB_PORT")
     DB_NAME = os.getenv("DB_NAME")
     if not all([DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME]):
-        raise RuntimeError(DATABASE_CONFIG_ERROR)
+        raise RuntimeError(ERROR_DATABASE_CONFIG)
 
     SQLALCHEMY_DATABASE_URI = f"{DB_DIALECT}+{DB_DRIVER}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"

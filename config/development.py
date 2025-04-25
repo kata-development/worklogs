@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 from config.config import Config
-from utils.constants import DATABASE_CONFIG_ERROR, DB_DIALECT, DB_DRIVER, DEVELOPMENT_SECRET_KEY, ENV_DEVELOPMENT_FILE
+from utils.constants import DB_DIALECT, DB_DRIVER, DEVELOPMENT_SECRET_KEY, ENV_DEVELOPMENT_FILE, ERROR_DATABASE_CONFIG
 
 
 class DevelopmentConfig(Config):
@@ -25,6 +25,6 @@ class DevelopmentConfig(Config):
     DB_PORT = os.getenv("DB_PORT")
     DB_NAME = os.getenv("DB_NAME")
     if not all([DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME]):
-        raise RuntimeError(DATABASE_CONFIG_ERROR)
+        raise RuntimeError(ERROR_DATABASE_CONFIG)
 
     SQLALCHEMY_DATABASE_URI = f"{DB_DIALECT}+{DB_DRIVER}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
