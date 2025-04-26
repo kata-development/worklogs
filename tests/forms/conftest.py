@@ -6,12 +6,12 @@ from app import create_app
 
 @pytest.fixture
 def app():
-    """フォームテスト用のdbなしFlaskアプリケーションを作成"""
+    """フォームテスト用のテーブルなしFlaskアプリケーションを作成"""
     app = create_app("testing")
     return app
 
 
 @pytest.fixture(autouse=True)
 def db_session():
-    """dbを使用しない場合のダミーdb_sessionフィクスチャ"""
+    """テーブルを使用しない場合のダミーdb_sessionフィクスチャ"""
     yield
