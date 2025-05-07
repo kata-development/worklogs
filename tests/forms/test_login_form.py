@@ -4,15 +4,14 @@ import random
 import pytest
 
 from app.forms.auth.login_form import LoginForm
+from app.validators.password import validate_strong_password
 from utils.constants import (
     EMAIL_MAX_LENGTH,
     EMPLOYEE_CODE_MAX_LENGTH,
-    ERROR_ALPHANUMERIC_AND_SYMBOLS_ONLY,
     ERROR_ALPHANUMERIC_ONLY,
     ERROR_INVALID_FORMAT,
     ERROR_LENGTH,
     ERROR_LENGTH_RANGE,
-    ERROR_PASSWORD_COMBINATION,
     ERROR_REQUIRED,
     LABEL_EMAIL,
     LABEL_EMPLOYEE_CODE,
@@ -161,32 +160,12 @@ def test_password_length_too_long(app, valid_form_data):
         assert expected_error in form.password.errors
 
 
-def test_password_strength_not_met_missing_digit(app, valid_form_data):
-    """パスワードに必要な文字（例：数字）が含まれていない場合、強度チェックに失敗すること
-
-    パスワードに必要な文字の組み合わせについては、tests/validators/test_password.py で確認
-    """
+def test_custom_validator_integration(app, valid_form_data):
+    """カスタムバリデータ validate_strong_password が LoginForm に組み込まれていること"""
     data = valid_form_data.copy()
-    data["password"] = "PasswordTestVal" + random.choice(PASSWORD_SPECIAL_CHARACTERS)
     with app.test_request_context(method="POST", data=data):
         form = LoginForm()
-        valid = form.validate()
-        assert not valid
-        # エラーメッセージ
-        expected_error = ERROR_PASSWORD_COMBINATION.format(chars=PASSWORD_SPECIAL_CHARACTERS)
-        assert expected_error in form.password.errors
-
-
-def test_password_invalid_characters(app, valid_form_data):
-    """パスワードに許可されていない文字（スペース）が含まれている場合、エラーが発生すること"""
-    data = valid_form_data.copy()
-    data["password"] = "PasswordTest12" + random.choice(PASSWORD_SPECIAL_CHARACTERS) + " "
-    with app.test_request_context(method="POST", data=data):
-        form = LoginForm()
-        valid = form.validate()
-        assert not valid
-        # エラーメッセージ
-        expected_error = ERROR_ALPHANUMERIC_AND_SYMBOLS_ONLY.format(
-            field=LABEL_PASSWORD, chars=PASSWORD_SPECIAL_CHARACTERS
+        password_validators = form.password.validators
+        assert any(validator == validate_strong_password for validator in password_validators), (
+            "カスタムバリデータvalidate_strong_passwordがpasswordフィールドに組み込まれていません"
         )
-        assert expected_error in form.password.errors
