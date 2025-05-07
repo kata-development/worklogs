@@ -13,7 +13,7 @@ from utils.constants import (
 
 
 def validate_strong_password(_form: Form, field: Field) -> None:
-    """パスワードの構文チェック（英字・数字・記号）
+    """パスワードの構文チェック（英大文字・英小文字・数字・記号）
 
     WTForms のカスタムバリデータ仕様に従い、_form 引数が必要
     （この関数内では form は使用しないが削除するとエラーになる）
@@ -33,15 +33,16 @@ def validate_strong_password(_form: Form, field: Field) -> None:
     password_data: str = field.data
     allowed_chars: str = string.ascii_letters + string.digits + PASSWORD_SPECIAL_CHARACTERS
 
-    # 文字の組み合わせ
+    # 英大文字、英小文字、数字、記号のすべてが含まれているかチェック
     if not (
-        any(char.isalpha() for char in password_data)
+        any(char.isupper() for char in password_data)
+        and any(char.islower() for char in password_data)
         and any(char.isdigit() for char in password_data)
         and any(char in PASSWORD_SPECIAL_CHARACTERS for char in password_data)
     ):
         raise ValidationError(ERROR_PASSWORD_COMBINATION.format(chars=PASSWORD_SPECIAL_CHARACTERS))
 
-    # 半角英数字と指定された記号のみ
+    # 半角英数字及び指定された記号のみが使用されているかチェック
     if any(char not in allowed_chars for char in password_data):
         raise ValidationError(
             ERROR_ALPHANUMERIC_AND_SYMBOLS_ONLY.format(field=LABEL_PASSWORD, chars=PASSWORD_SPECIAL_CHARACTERS)
